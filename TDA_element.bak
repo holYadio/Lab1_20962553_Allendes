@@ -1,0 +1,10 @@
+#lang racket
+(provide (all-defined-out))
+;; TDA element ;;
+;Representacion:
+; lista de elementos X numero de elementos en cada carta X Maximo de cartas X Funcion de aleatorizacion
+
+;; Capa Constructora ;;
+;Descripcion: Constructor de set de cartas
+;Dom: string X int X int
+;Rec: cardsSet
