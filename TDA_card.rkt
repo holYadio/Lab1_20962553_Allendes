@@ -9,7 +9,7 @@
 ;Dom: list X int X randomFn
 ;Rec: card
 (define card
-  (lambda (list int rndFn)
+  (lambda (lista int rndFn)
     (cond
       [(null? lista) null] 
       [()])))
