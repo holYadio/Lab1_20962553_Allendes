@@ -1,1 +1,21 @@
 #lang racket
+(provide (all-defined-out))
+;; TDA cardsSet ;;
+;Representacion:
+; (list element1 element2 ... elementN)
+
+;; Capa Constructora ;;
+;Descripcion: Funcion Constructora de una carta
+;Dom: list X int X randomFn
+;Rec: card
+;(define card
+ ; (lambda (lista int rndFn)
+  ;  (cond
+   ;   [(null? lista) null] 
+    ;  [()])))
+
+(define selElementoLista
+  (λ (lista n)
+    (cond
+      [(eq? n 1) (car lista)]
+      [(> n 1) (selElementoLista (cdr lista) (- n 1))])))

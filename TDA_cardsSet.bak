@@ -1,17 +1,20 @@
 #lang racket
 (provide (all-defined-out))
-(require "TDA")
+(require "TDA_element.rtk")
+(require "TDA_card.rtk")
 ;; TDA cardsSet ;;
 ;Representacion:
-; lista de elementos X numero de elementos en cada carta X Maximo de cartas X Funcion de aleatorizacion
+; (list card)
 
 ;; Capa Constructora ;;
 ;Descripcion: Constructor de set de cartas
-;Dom: string X int X int
+;Dom: list(lista de elementos) X int(numero de elementos en cada carta) X int(Maximo de cartas) X randomFn(Funcion de aleatorizacion)
 ;Rec: cardsSet
 (define cardsSet
-  (lambda (listaElementos cantElemento maxCartas rndFn)
-    (list (car))))
+  (λ (listaElementos cantElemento maxCartas rndFn)
+    (cond
+      []
+      [])))
 
 
 ; Funcion de utilidad ;
