@@ -13,19 +13,19 @@
 ;Descripcion: Constructor de set de cartas
 ;Dom: list(lista de elementos) X int(numero de elementos en cada carta) X int(Maximo de cartas) X randomFn(Funcion de aleatorizacion)
 ;Rec: cardsSet
-;(define cardsSet
- ; (λ (listaElementos cantElemento maxCartas rndFn)
-  ;  (cond
-   ;   [(eq? i 1)()]
-    ;  [])))
+(define cardsSet
+  (λ (listaElementos cantElemento maxCartas rndFn)
+    (rndFn (createCardsSet listaElementos cantElemento maxCartas 1 1 1)
+              '()
+              1
+              (length (createCardsSet listaElementos cantElemento maxCartas 1 1 1))
+              (valRandom (createCardsSet listaElementos cantElemento maxCartas 1 1 1)
+                         (random (length (createCardsSet listaElementos cantElemento maxCartas 1 1 1)))))))
 
 (define createCardsSet
   (λ (listaElementos elementosXCarta MCards i j k)
     (cond
       [(< MCards 0) (append (list (firstCard listaElementos elementosXCarta i '())) (nCards listaElementos elementosXCarta j k '() '()) (n2Cards listaElementos elementosXCarta i j k '() '()))])))
-
-
-
 
 (define nCards
   (λ (listaElementos elementosXCarta j k listacard card)
@@ -47,22 +47,28 @@
 ; Descripcion:Genera un numero aleatorio en torno al valor maximo
 ; Dom: entero
 ; Rec: entero
+(define valRandom
+  (λ (largoL x)
+    (cond
+      [(eq? x largoL) (- x 1)]
+      [(eq? x 0) (+ x 1)]
+      [else x])))
 
-
-(define randomInt
-  (λ (lista)
-    (random
-     (length lista))))
 
 (define randomFn
-  (λ (lista1 lista2 x)
+  (λ (lista1 lista2 i largoL1 x)
     (cond
-      [(null? lista1) lista2]
-      [else (randomFn (remove x lista1) (append (list (selElementoLista lista1 x)) (lista2)))])))
-
+      [(eq? i (+ largoL1 1)) lista2]
+      [else (randomFn (remove (selElementoLista lista1 x) lista1) (append (list (selElementoLista lista1 x)) lista2) (+ i 1) largoL1 (valRandom largoL1 (random (length lista1))))])))
+    
 ;(nCards (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 1 '() '())
 ;(nCards (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 1 '() '())
 ;(n2Cards (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 1 1 '() '())
 ;(n2Cards (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 1 1 '() '())
-(define a1 (createCardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 -1 1 1 1))
-(randomFn (createCardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 -1 1 1 1) '() (randomInt(createCardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 -1 1 1 1)))
+;(createCardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 -1 1 1 1)
+;(randomFn (createCardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 -1 1 1 1)
+ ;         '()
+  ;        1
+   ;       (length (createCardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 -1 1 1 1))
+    ;      (valRandom (createCardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 -1 1 1 1) (random (length (createCardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 -1 1 1 1)))))
+(cardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 3 -1 randomFn)

@@ -50,8 +50,10 @@
 (define selElementoLista
   (λ (lista n)
     (cond
-      [(eq? n 1) (car lista)]
-      [(> n 1) (selElementoLista (cdr lista) (- n 1))])))
+      [(null? lista) null]
+      [else (cond
+              [(eq? n 1) (car lista)]
+              [(> n 1) (selElementoLista (cdr lista) (- n 1))])])))
 
 ;(firstCard (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 '())
 ;(nCard (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 1 '())
