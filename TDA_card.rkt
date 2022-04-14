@@ -1,59 +1,80 @@
 #lang racket
 (provide (all-defined-out))
-;; TDA cardsSet ;;
+;; TDA card ;;
 ;Representacion:
 ; (list element1 element2 ... elementN)
 
 ;; Capa Constructora ;;
 ;Descripcion: Funcion Constructora de la primera carta
-;Dom: list X int X randomFn
-;Rec: card
-;(define card
- ; (lambda (lista int rndFn)
-  ;  (cond
-   ;   [(null? lista) null] 
-    ;  [()])))
+;Dom: lista de elementos(list) X elementos por carta(int) X contador(int) X carta(TDA card)
+;Rec: carta(TDA card)
 (define firstCard
   (λ (listaElementos elementosXCarta i card)
     (cond
       [(eq? i elementosXCarta) (addElement card listaElementos i)]
-      [else (firstCard listaElementos elementosXCarta (+ i 1) (addElement card listaElementos i))])))
+      [else (firstCard listaElementos elementosXCarta (+ i 1) (addElement card listaElementos i))]
+      )
+    )
+  )
 
+
+;Descripcion: Funcion Constructora de las siguientes n-1 cartas
+;Dom: lista de elementos(list) X elementos por carta(int) X contador(int) X contador(int) X carta(TDA card)
+;Rec: carta(TDA card)
 (define nCard
   (λ (listaElementos elementosXCarta j k card)
     (cond
       [(eq? k (- elementosXCarta 1)) (append (list (car listaElementos)) (addElement card listaElementos (+ (* (- elementosXCarta 1) j) (+ k 1))))]
-      [else (nCard listaElementos elementosXCarta j (+ k 1) (addElement card listaElementos (+ (* (- elementosXCarta 1) j) (+ k 1))))])))
+      [else (nCard listaElementos elementosXCarta j (+ k 1) (addElement card listaElementos (+ (* (- elementosXCarta 1) j) (+ k 1))))]
+      )
+    )
+  )
 
+
+;Descripcion: Funcion Constructora del resto de cartas
+;Dom: lista de elementos(list) X elementos por carta(int) X contador(int) X contador(int) X contador(int) X carta(TDA card)
+;Rec: carta(TDA card)
 (define n2Card
   (λ (listaElementos elementosXCarta i j k card)
     (cond
       [(eq? k (- elementosXCarta 1)) (append (list (selElementoLista listaElementos (+ i 1))) (addElement card listaElementos (+ (- elementosXCarta 1) 2 (* (- elementosXCarta 1) (- k 1)) (remainder (+ (* (- i 1) (- k 1)) (- j 1)) (- elementosXCarta 1)))))]
-      [else (n2Card listaElementos elementosXCarta i j (+ k 1) (addElement card listaElementos (+ (- elementosXCarta 1) 2 (* (- elementosXCarta 1) (- k 1)) (remainder (+ (* (- i 1) (- k 1)) (- j 1)) (- elementosXCarta 1)))))])))
+      [else (n2Card
+             listaElementos
+             elementosXCarta
+             i
+             j
+             (+ k 1)
+             (addElement card listaElementos (+ (- elementosXCarta 1) 2 (* (- elementosXCarta 1) (- k 1)) (remainder (+ (* (- i 1) (- k 1)) (- j 1)) (- elementosXCarta 1)))))]
+      )
+    )
+  )
+
 
 ;; Otras Funciones ;;
-(define addCard
-  (λ (listaCards card)
-    (append listaCards card)))
-
 ;Descripcion: Funcion agregar un elemento a una carta
 ;Dom: list X int
 ;Rec: element
 (define addElement
   (λ (lista1 lista2 i)
-    (append lista1 (list (selElementoLista lista2 i)))))
+    (append lista1 (list (selElementoLista lista2 i)))
+    )
+  )
 
 
-;Descripcion: Funcion para seleccionar el elemento n de la lista
-;Dom: list X int
-;Rec: element
+;Descripcion: Funcion para seleccionar el elemento n de una carta
+;Dom: carta(TDA) X Elemento seleccionado(int)
+;Rec: element(TDA)
 (define selElementoLista
   (λ (lista n)
     (cond
       [(null? lista) null]
       [else (cond
               [(eq? n 1) (car lista)]
-              [(> n 1) (selElementoLista (cdr lista) (- n 1))])])))
+              [(> n 1) (selElementoLista (cdr lista) (- n 1))])]
+      )
+    )
+  )
+
 
 ;(firstCard (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 '())
 ;(nCard (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 1 '())
