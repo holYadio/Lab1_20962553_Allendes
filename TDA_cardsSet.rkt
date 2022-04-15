@@ -32,7 +32,30 @@
       [(eq? 0 (remainder)) #T])))
 
 
-;; Funcion de utilidad ;;
+;; Capa Selector ;;
+; Descripcion:  Determina la lista de elementos del set de cartas.
+; Dom: cardsSet(TDA)
+; Rec: lista de elementos(TDA)
+(define getListaElementos
+  (λ (setCards)
+    (car (reverse setCards))
+    )
+  )
+
+
+; Descripcion:  Obtiene la n-ésima (nth) carta desde el conjunto de cartas partiendo desde 0 hasta (totalCartas-1).
+; Dom: cardsSet(TDA) X Posicion de la carta(int)
+; Rec: n-esima carta(TDA)
+(define nthCard
+  (λ (lista n) 
+   (cond 
+    [(eq? 0 n)(car lista)]
+    [else (nthCard (cdr lista) (- n 1))])
+    )
+  )
+
+
+;; Otras operaciones ;;
 ;Descripcion: crear lista de cartas.
 ;Dom: lista de elementos(list) X elementos por carta(int) X maximo de cartas(int) X contador(int) X contador(int) X contador(int)
 ;Rec: lista de cartas(list)
@@ -129,24 +152,13 @@
     )
   )
 
-; Descripcion:  Permite determinar la cantidad de cartas en el set.
+
+; Descripcion: Permite determinar la cantidad de cartas en el set.
 ; Dom: cardsSet(TDA)
 ; Rec: cantidad de cartas(int)
 (define numCards
   (λ (cardsSet)
     (length cardsSet)
-    )
-  )
-
-
-; Descripcion:  Obtiene la n-ésima (nth) carta desde el conjunto de cartas partiendo desde 0 hasta (totalCartas-1).
-; Dom: cardsSet(TDA) X Posicion de la carta(int)
-; Rec: n-esima carta(TDA)
-(define nthCard
-  (λ (lista n) 
-   (cond 
-    [(eq? 0 n)(car lista)]
-    [else (nthCard (cdr lista) (- n 1))])
     )
   )
 
@@ -160,6 +172,7 @@
     )
   )
 
+
 ; Descripcion:  Determina la cantidad total de cartas que se deben producir para construir un conjunto válido.
 ; Dom: card(TDA)
 ; Rec: total de elementos necesarios para poder construir un conjunto válido(int)
@@ -169,36 +182,47 @@
     )
   )
 
+
 ; Descripcion:  Determina la cantidad total de cartas que se deben producir para construir un conjunto válido.
 ; Dom: card(TDA)
 ; Rec: cantidad de cartas(TDA)
 (define missingCards
   (λ (setCards)
-    (map delCard (nthCard setCards 1) (getListaElementos setCards))
+    (append (delCard setCards (length setCards) 0 (cardsSet (getListaElementos setCards) (length (nthCard setCards 1)) -1 randomFn)) (list (getListaElementos setCards)))
     )
   )
 
 
-; Descripcion:  Determina la lista de elementos del set de cartas.
-; Dom: cardsSet(TDA)
-; Rec: lista de elementos(TDA)
-(define getListaElementos
-  (λ (setCards)
-    (car (reverse setCards))
-    )
-  )
-
-
-; Descripcion:  eliminar carta de un set de cartas.
+; Descripcion:  eliminar cartas de un set de cartas.
 ; Dom: cardsSet(TDA)
 ; Rec: cardsSet(TDA)
 (define delCard
-  (λ (card listaElementos)
-    (remove card (cardsSet listaElementos (length card) -1 randomFn))
+  (λ (setCards largoCards i complementoSetCards)
+    (cond
+      [(eq? largoCards i) complementoSetCards]
+      [else (delCard setCards largoCards (+ i 1) (remove (nthCard setCards i) complementoSetCards))])
     )
   )
 
-(define l1 (cardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 0 randomFn))
-(define l2 (cardsSet (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 4 randomFn))
-(missingCards  l2)
 
+; Descripcion:  eliminar lista de elementos de un set de cartas.
+; Dom: cardsSet(TDA)
+; Rec: lista de cartas(list)
+(define delListaElementos
+  (λ (setCards)
+    (reverse (cdr (reverse setCards)))
+    )
+  )
+
+
+;Descripcion: Convierte un conjunto de cartas a una representación basada en strings.
+;Dom: cardsSet(TDA)
+;Rec: representacion en string (string)
+;(define cardsSet->string
+ ; (λ (cardsSet)))
+
+;(define l1 (cardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 randomFn))
+(define l2 (cardsSet (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 4 randomFn))
+;(missingCards  l2)
+l2
+(delListaElementos l2)
