@@ -265,13 +265,3 @@
 ;Rec: cardsSetVacio(TDA)
 (define empyCardsSet
   '())
-
-
-;(define l1 (cardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 randomFn))
-;(define l2 (cardsSet (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 -1 randomFn))
-;(missingCards  l2)
-;l2
-;(delListaElementos l2)
-;(display (cardsSet->string l2))
-;(define l1 (cardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 randomFn))
-;(dobble? l1)

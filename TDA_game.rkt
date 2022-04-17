@@ -167,7 +167,8 @@
 ; Rec: Usuario a quien le corresponde jugar(str)
 (define whoseTurnIsIt?
  (λ (gm)
-    (string-append "Le corresponde jugar al jugador " (~a (getTurnoJugador (getTablero gm))) ": " (getNamePlayer (getNplayer (getTurnoJugador (getTablero gm)) (getListaPlayers (getTablero gm)))) "\n")))
+    (string-append "Le corresponde jugar al jugador " (~a (getTurnoJugador (getTablero gm))) ": " (getNamePlayer (getNplayer (getTurnoJugador (getTablero gm)) (getListaPlayers (getTablero gm)))) "\n"))
+  )
 
 
 
@@ -175,23 +176,3 @@
 
 
 
-;(define l1 '((3 7 8 12) (1 11 12 13) (2 6 9 12) (2 5 8 11) (1 2 3 4) (4 5 10 12) (4 7 9 11) (1 5 6 7) (4 6 8 13) (2 7 10 13) (3 5 9 13) (1 8 9 10) (3 6 10 11) (1 2 3 4 5 6 7 8 9 10 11 12 13)))
-;(define numPlayers 4)
-;(define numElementsPerCard 4)
-;(define maxCards 10)
-;(define elements1 (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"))
-;(define elements2 (list  1   2   3   4   5   6   7   8   9   10  11  12  13))
-
-
-;(define dobbleSet0 (cardsSet elements2 numElementsPerCard -1 randomFn))
-;(define dobbleSet1 (cardsSet elements1 numElementsPerCard -1 randomFn))
-;(missingCards  l2)
-;l2
-;(delListaElementos l2)
-;(display (cardsSet->string l2))
-;dobbleSet0
-;dobbleSet1
-;(define game1(createGame 4 dobbleSet0 "stackMode" "randomFn" empyTablero))
-;(define game2 (register "uwu" (register "awa" game1)))
-;(display (whoseTurnIsIt? game2))
-;(setCardsSet dobbleSet1 game1)

@@ -46,10 +46,3 @@
   (caddr pl)
     )
   )
-
-
-
-;(define p1 (player "Juan" '(1 2 3 4) 1))
-;(getNamePlayer p1)
-;(getcardsSetPlayer p1)
-;(getNumPlayer p1)

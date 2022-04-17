@@ -75,11 +75,3 @@
     (append lista1 (list (selElementoLista lista2 i)))
     )
   )
-
-
-
-;(firstCard (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 '())
-;(nCard (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 1 '())
-;(nCard (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 1 '())
-;(n2Card (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 1 1 '())
-;(n2Card (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 1 1 '())
