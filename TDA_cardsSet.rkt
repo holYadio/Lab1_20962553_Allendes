@@ -255,7 +255,7 @@
   (λ (setCards i str)
     (cond
       [(< i 0) str]
-      [else (armarStringCardsSet setCards (- i 1) (string-append (~a (nthCard setCards i)) (string-append " " str)))])
+      [else (armarStringCardsSet setCards (- i 1) (string-append "Carta " (~a  (+ 1 i)) ": "(~a (nthCard setCards i)) (string-append "\n" str)))])
     )
   )
 
@@ -268,7 +268,7 @@
 
 
 ;(define l1 (cardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 randomFn))
-(define l2 (cardsSet (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 -1 randomFn))
+;(define l2 (cardsSet (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 -1 randomFn))
 ;(missingCards  l2)
 ;l2
 ;(delListaElementos l2)
