@@ -26,10 +26,32 @@
 
 
 ;; Capa Pertenencia ;;
+; Descripcion: Función que permite verificar si el conjunto de cartas en el conjunto corresponden a un conjunto válido.
+; Dom: cardsSet(TDA)
+; Rec: boolean
+; Recursion: Natural
 (define dobble?
   (λ (setCartas)
     (cond
-      [(eq? 0 (remainder)) #T])))
+      [(null? setCartas) #t]
+      [(member (car setCartas) (cdr setCartas)) #f]
+      [(eq? (length setCartas) 1) (if (elementsDuplicado? (car setCartas)) #f #t)]
+      [else (dobble? (cdr setCartas))])
+    )
+  )
+
+; Descripcion: Función que permite verificar si la lista de elementos del conjunto es válida.
+; Dom: lista de Elementos(list)
+; Rec: boolean
+(define elementsDuplicado?
+  (λ (listaE)
+    (cond
+      [(null? listaE) #f]
+      [(member (car listaE) (cdr listaE)) #t]
+      [else (elementsDuplicado? (cdr listaE))])
+    )
+  )
+
 
 
 ;; Capa Selector ;;
@@ -188,9 +210,10 @@
 ; Rec: cantidad de cartas(TDA)
 (define missingCards
   (λ (setCards)
-    (append (delCard setCards (length setCards) 0 (cardsSet (getListaElementos setCards) (length (nthCard setCards 1)) -1 randomFn)) (list (getListaElementos setCards)))
+    (delCard setCards (length setCards) 0 (cardsSet (getListaElementos setCards) (length (nthCard setCards 1)) -1 randomFn))
     )
   )
+  
 
 
 ; Descripcion:  eliminar cartas de un set de cartas.
@@ -218,11 +241,37 @@
 ;Descripcion: Convierte un conjunto de cartas a una representación basada en strings.
 ;Dom: cardsSet(TDA)
 ;Rec: representacion en string (string)
-;(define cardsSet->string
- ; (λ (cardsSet)))
+(define cardsSet->string
+  (λ (cardsSet)
+    (armarStringCardsSet (delListaElementos cardsSet) (- (length (delListaElementos cardsSet)) 1) " ")
+    )
+  )
+
+
+;Descripcion: Convierte un conjunto de cartas a una representación basada en strings.
+;Dom: cardsSet(TDA) X contador(int) X string vacio(str)
+;Rec: string de las cartas (string)
+(define armarStringCardsSet
+  (λ (setCards i str)
+    (cond
+      [(< i 0) str]
+      [else (armarStringCardsSet setCards (- i 1) (string-append (~a (nthCard setCards i)) (string-append " " str)))])
+    )
+  )
+
+
+;Descripcion: Convierte un conjunto de cartas a una representación basada en strings.
+;Dom: null
+;Rec: cardsSetVacio(TDA)
+(define empyCardsSet
+  '())
+
 
 ;(define l1 (cardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 randomFn))
-(define l2 (cardsSet (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 4 randomFn))
+(define l2 (cardsSet (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 -1 randomFn))
 ;(missingCards  l2)
-l2
-(delListaElementos l2)
+;l2
+;(delListaElementos l2)
+;(display (cardsSet->string l2))
+;(define l1 (cardsSet (list  1   2   3   4   5   6   7   8   9   10  11  12  13) 4 1 randomFn))
+;(dobble? l1)

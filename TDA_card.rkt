@@ -18,7 +18,7 @@
   )
 
 
-;Descripcion: Funcion Constructora de las siguientes n-1 cartas
+;Descripcion: Funcion Constructora de las siguientes n cartas
 ;Dom: lista de elementos(list) X elementos por carta(int) X contador(int) X contador(int) X carta(TDA card)
 ;Rec: carta(TDA card)
 (define nCard
@@ -50,17 +50,7 @@
   )
 
 
-;; Otras Funciones ;;
-;Descripcion: Funcion agregar un elemento a una carta
-;Dom: list X int
-;Rec: element
-(define addElement
-  (λ (lista1 lista2 i)
-    (append lista1 (list (selElementoLista lista2 i)))
-    )
-  )
-
-
+;; Capa Selector ;;
 ;Descripcion: Funcion para seleccionar el elemento n de una carta
 ;Dom: carta(TDA) X Elemento seleccionado(int)
 ;Rec: element(TDA)
@@ -74,6 +64,18 @@
       )
     )
   )
+
+
+;; Otras operaciones ;;
+;Descripcion: Funcion agregar un elemento a una carta
+;Dom: list X int
+;Rec: element
+(define addElement
+  (λ (lista1 lista2 i)
+    (append lista1 (list (selElementoLista lista2 i)))
+    )
+  )
+
 
 
 ;(firstCard (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 4 1 '())

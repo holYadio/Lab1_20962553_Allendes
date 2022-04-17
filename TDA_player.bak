@@ -1,0 +1,5 @@
+#lang racket
+(provide (all-defined-out))
+;; TDA Player ;;
+;Representacion:
+; user X cardsSet X orden 
