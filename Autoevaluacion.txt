@@ -1,0 +1,41 @@
+---------------------Autoevaluacion----------------------
+Jhoisan Allendes Laboratorio N°1 Paradigma Funcional
+
+--------REQUISITOS NO FUNCIONALES--------
+
+-Autoevaluacion:	1
+-Lenguaje: 		1
+-Version: 		1
+-Standard:		1
+-No Variables: 		1	
+-Documentacion:		1		
+-Dom->Rec: 		1
+-Organizacion: 		1
+-Historial:		1
+-Ejemplos: 		1
+-Prerrequisitos: 	1
+
+----------REQUISITOS FUNCIONALES----------
+
+-TDAs:			1
+-TDA cardsSet:
+ - cardsSet:		1
+ - dobble?:		1
+ - numCards:		1
+ - nthCard:		1
+ - findTotalCards:	1	
+ - requiredElements:	1	
+ - missingCards:	1	
+ - cardsSet->string: 	1	
+ - addCard:		0
+TDA game:
+ - constructor:		1		
+ - stackMode:		1
+ - register:		1
+ - whoseTurnIsIt?:	1	
+ - play:		0
+ - status:		0
+ - score:		0
+ - game->string:	0	
+ - empyHandsStackMode:	0	
+ - myMode:		0
